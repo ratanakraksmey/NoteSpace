@@ -4,35 +4,45 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Notes</title>
-  <title>Notes</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  </head>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
 </head>
 <body>
   <header>
-    <h1>NoteSpace</h1>
-    <span>{{ notes|length }} notes</span>
+    <h1>Notes</h1>
+    <span class="dot"></span>
+    <span class="note-count">{{ notes|length }} note{{ 's' if notes|length != 1 else '' }}</span>
   </header>
-  <div>
+  <div class="composer">
     <form action="/add" method="POST">
-      <input type="text" name="title" placeholder="Title"/>
-      <textarea name="body" placeholder="Write something..."></textarea>
-      <button type="submit">Save</button>
+      <input class="title-input" type="text" name="title" placeholder="Title" autocomplete="off" maxlength="80"/>
+      <textarea class="body-input" name="body" placeholder="Write something..." maxlength="1000"></textarea>
+      <div class="composer-footer">
+        <button class="save-btn" type="submit">Save</button>
+      </div>
     </form>
   </div>
-  <div>
+  <div class="notes-grid">
     {% if notes %}
       {% for note in notes %}
-      <div>
-        <b>{{ note.title }}</b>
-        <p>{{ note.body }}</p>
-        <form action="/delete/{{ note.id }}" method="POST">
-          <button type="submit">Delete</button>
-        </form>
+      <div class="note-card">
+        <div class="tag-strip"></div>
+        <div class="note-title">{{ note.title }}</div>
+        {% if note.body %}
+        <div class="note-body">{{ note.body }}</div>
+        {% endif %}
+        <div class="note-meta">
+          <form action="/delete/{{ note.id }}" method="POST">
+            <button class="delete-btn" type="submit">Delete</button>
+          </form>
+        </div>
       </div>
       {% endfor %}
     {% else %}
-      <p>No notes yet.</p>
+      <div class="empty-state">
+        <span class="big">✦</span>
+        No notes yet — write your first one above.
+      </div>
     {% endif %}
   </div>
 </body>
