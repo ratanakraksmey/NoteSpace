@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoteSpace</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Mono:wght@300;400&display=swap">
+</head>
+<body>
+
+  <header>
+    <h1>NoteSpace</h1>
+    <span class="dot"></span>
+    <span class="note-count" id="note-count">0 notes</span>
+  </header>
+
+  <div class="composer">
+    <input class="title-input" id="note-title" type="text" placeholder="Title" maxlength="80" autocomplete="off"/>
+    <textarea class="body-input" id="note-body" placeholder="Write something..." maxlength="1000"></textarea>
+    <div class="composer-footer">
+      <span class="char-count" id="char-count">0 / 1000</span>
+      <button class="save-btn" onclick="saveNote()">Save</button>
+    </div>
+  </div>
+
+  <div class="notes-grid" id="notes-grid">
+    <div class="empty-state" id="empty-state">
+      <span class="big">✦</span>
+      No notes yet — write your first one above.
+    </div>
+  </div>
+</html>
